@@ -48,8 +48,8 @@ class ConsoleServiceProvider extends ServiceProvider implements DeferrableProvid
      */
     protected function registerFreshCommand()
     {
-        $this->app->singleton('command.migrate.fresh', static function () {
-            return new FreshCommand();
+        $this->app->singleton('command.migrate.fresh', static function (Container $app) {
+            return new FreshCommand($app->make('migrator'));
         });
     }
 
